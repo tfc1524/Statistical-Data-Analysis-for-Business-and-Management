@@ -48,17 +48,14 @@ abline(fitgas)
 
 # 2b
 ## CI plot
-xy <- data.frame(X=pretty(gas$DegreesBelow65))
+xy <- data.frame(X=gas$DegreesBelow65)
 yhat <- predict(fitgas, newdata=xy, interval="confidence")
 ci <- data.frame(lower=yhat[,"lwr"], upper=yhat[,"upr"])
-
-lines(xy$X, ci$lower, lty=2, col="red")
-lines(xy$X, ci$upper, lty=2, col="blue")
 
 ## Advanced Practice: CI & PI plot
 yhat.pi <- predict(fitgas, newdata=xy, interval="prediction")
 pi <- data.frame(lower=yhat.pi[,"lwr"], upper=yhat.pi[,"upr"])
-plot(X,Y, main ="Confidence and Prediction Intervals",
+plot(x=gas$DegreesBelow65, y=gas$Gas.CCF, main ="Confidence and Prediction Intervals",
      ylab = "Gas.CCF", 
      xlab = "DegreesBelow65")
 abline(fitgas)
@@ -66,3 +63,31 @@ lines(xy$X, ci$lower, lty=2, col="red")
 lines(xy$X, ci$upper, lty=2, col="red")
 lines(xy$X, pi$lower, lty=2, col="blue")
 lines(xy$X, pi$upper, lty=2, col="blue")
+
+# 3
+caracc <- read.table("Statistical-Data-Analysis-for-Business-and-Management\\asd1101-01-1\\asd1101-01\\car_accident.txt", header=TRUE)
+pairs(caracc)
+
+fitcar <- lm(caracc$Accidents ~ caracc$Cars + caracc$Speed)
+
+# Diagnostic Plots - Residual plot
+plot(x=caracc$Cars, y=residuals(fitcar), xlab="Cars", ylab="Residuals", main='Residual Plot(fitcar)')
+abline(h=0)
+
+# Diagnostic Plots - Residual plot
+plot(x=caracc$Speed, y=residuals(fitcar), xlab="Speed", ylab="Residuals", main='Residual Plot(fitcar)')
+abline(h=0)
+
+# Diagnostic Plots - Histogram on Residuals
+hist(residuals(fitcar))
+
+summary(fitcar)
+
+# 第二個模型只用car
+fitcar1 <- lm(caracc$Accidents ~ caracc$Cars)
+fitcarspd <- lm(caracc$Accidents ~ caracc$Speed)
+anova(fitcar1, fitcar)
+anova(fitcarspd, fitcar)
+summary(fitcar1)
+summary(fitcarspd)
+
