@@ -95,7 +95,7 @@ summary(fitRC1)		# Note the reference level of St.
 St <- relevel(St, ref="OR")
 fitRC1 <- lm(Rv~Cc*St)
 summary(fitRC1)
-	model.matrix(fitRC1)
+model.matrix(fitRC1)
 
 St <- relevel(St, ref="WA")
 fitRC2 <- lm(Rv~Cc*St)

@@ -6,7 +6,7 @@ attach(data)
 # easy summary
 a <- subset(data, select = c('UnitsSold', 'AverageRetailPrice', 'Revenue'))
 summary(a)
-
+par(mfrow=c(1,1))
 hist(UnitsSold)
 hist(AverageRetailPrice, xlab='AverageRetailPrice(USD)')
 hist(Revenue, xlab='Revenue(USD)')
