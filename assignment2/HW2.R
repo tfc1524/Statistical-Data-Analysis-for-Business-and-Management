@@ -79,3 +79,4 @@ summary(mod1)
 
 best <- step(mod1)
 summary(mod2)
+

@@ -68,3 +68,4 @@ abline(h=0, col='black')
 
 # 3-c
 confint(bmwmodel)
+
